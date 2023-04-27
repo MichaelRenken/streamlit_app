@@ -4,6 +4,25 @@ import streamlit as st
 import joblib
 import nltk #importing a stop words function from nltk
 import string #importing a package of usefull strings. Will use string.punctuation for this
+from google.oauth2 import service_account
+from google.cloud import storage
+
+# Create API client.
+credentials = service_account.Credentials.from_service_account_info(
+    st.secrets["gcp_service_account"]
+)
+client = storage.Client(credentials=credentials)
+
+# Retrieve file contents.
+# Uses st.cache_data to only rerun when the query changes or after 10 min.
+@st.cache_data()
+def read_file(bucket_name, file_path):
+    bucket = client.bucket(bucket_name)
+    content = bucket.blob(file_path).download_as_string().decode("utf-8")
+    return content
+
+bucket_name = "mr_streamlit_app"
+file_path = "BR_streamlit.sav"
 
 stemmer = nltk.stem.PorterStemmer()
 st_words = ['i',
@@ -209,7 +228,8 @@ def my_tokenizer(sentence):
     return listofstemmed_words
 
 
-model = joblib.load('mlknn_streamlit.sav') #model file
+#model = joblib.load('mlknn_streamlit.sav') #model file
+model = read_file(bucket_name, file_path) #pulls from google cloud instead
 TFIDF = joblib.load('TFIDF.sav') #tokenizer file
 genrelist = joblib.load('genrelist.sav') #genre name file
 
