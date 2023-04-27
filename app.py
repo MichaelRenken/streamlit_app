@@ -243,7 +243,9 @@ genrelist = joblib.load('genrelist.sav') #genre name file
 #Header
 st.title("This is Michael Renken's Book Description Genre Classifier!!")
 ###ask for input###
-input_string = st.text_area("Input a book description here (feel free to write your own)",value='“Once upon a time, a very long time ago now, about last Friday, Winnie-the-Pooh lived in a forest all by himself under the name of Sanders.” Curl up with a true children’s classic by reading A.A.Milne’s Winnie-the-Pooh with iconic decorations by E.H.Shepard. Winnie-the-Pooh may be a bear of very little brain, but thanks to his friends Piglet, Eeyore and, of course, Christopher Robin, he’s never far from an adventure. In this much-loved classic story collection Pooh gets into a tight place, nearly catches a Woozle and heads off on an ‘expotition’ to the North Pole with the other animals.')
+with st.form(key='my_form'):
+    input_string = st.text_area("Input a book description here (feel free to write your own)",value='“Once upon a time, a very long time ago now, about last Friday, Winnie-the-Pooh lived in a forest all by himself under the name of Sanders.” Curl up with a true children’s classic by reading A.A.Milne’s Winnie-the-Pooh with iconic decorations by E.H.Shepard. Winnie-the-Pooh may be a bear of very little brain, but thanks to his friends Piglet, Eeyore and, of course, Christopher Robin, he’s never far from an adventure. In this much-loved classic story collection Pooh gets into a tight place, nearly catches a Woozle and heads off on an ‘expotition’ to the North Pole with the other animals.')
+    submit_button = st.form_submit_button(label='Submit')
 ###run the model###
 test = TFIDF.transform([input_string])
 
