@@ -28,11 +28,11 @@ file_path = "BR_streamlit.sav"
 
 blobber = read_file(bucket_name, file_path) #pulls from google cloud instead
 #create the model object to run predictins from
-#model = io.BytesIO() #create bytes object
-#blobber.download_to_file(model_bytes) #transfer the sav to the bytes object
-#model_bytes.seek(0) #changes the position of the pointer
+model_bytes = io.BytesIO() #create bytes object
+blobber.download_to_file(model_bytes) #transfer the sav to the bytes object
+model_bytes.seek(0) #changes the position of the pointer
 
-model = joblib.load(blobber) #then use joblib to get this file.
+model = joblib.load(model_bytes) #then use joblib to get this file.
 
 
 
