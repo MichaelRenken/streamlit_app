@@ -20,7 +20,7 @@ file_path = "BR_streamlit.sav"
 
 # Retrieve file contents.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
-#@st.cache_resource()
+@st.cache_resource()
 def read_file(bucket_name, file_path):
     bucket = client.get_bucket(bucket_name)
     content = bucket.blob(file_path)
