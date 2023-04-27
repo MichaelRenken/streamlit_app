@@ -26,10 +26,10 @@ def read_file(bucket_name, file_path):
 bucket_name = "mr_streamlit_app"
 file_path = "BR_streamlit.sav"
 
-blob = read_file(bucket_name, file_path) #pulls from google cloud instead
-
+blobber = read_file(bucket_name, file_path) #pulls from google cloud instead
+#create the model object to run predictins from
 model = io.BytesIO()
-blob.download_to_file(model)
+blobber.download_to_file(model)
 model.seek(0)
 
 stemmer = nltk.stem.PorterStemmer()
