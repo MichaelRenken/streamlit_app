@@ -5,3 +5,4 @@ scikit-multilearn==0.2.0
 scipy==1.10.1
 scikit-learn==1.2.2
 google-cloud-storage==2.8.0
+imbalanced-learn==0.10.1
