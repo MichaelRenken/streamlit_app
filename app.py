@@ -15,26 +15,23 @@ credentials = service_account.Credentials.from_service_account_info(
 )
 client = storage.Client(credentials=credentials)
 
+bucket_name = "mr_streamlit_app"
+file_path = "BR_streamlit.sav"
+
 # Retrieve file contents.
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
 @st.cache_resource()
 def read_file(bucket_name, file_path):
     bucket = client.get_bucket(bucket_name)
     content = bucket.blob(file_path)
-    return content
-
-bucket_name = "mr_streamlit_app"
-file_path = "BR_streamlit.sav"
-
-blobber = read_file(bucket_name, file_path) #pulls from google cloud instead
-#create the model object to run predictins from
-model_bytes = io.BytesIO() #create bytes object
-blobber.download_to_file(model_bytes) #transfer the sav to the bytes object
-model_bytes.seek(0) #changes the position of the pointer
-
-model = joblib.load(model_bytes) #then use joblib to get this file.
-
-
+    #create the model object to run predictins from
+    model_bytes = io.BytesIO() #create bytes object
+    content.download_to_file(model_bytes)  #transfer the sav to the bytes object
+    model_bytes.seek(0) #changes the position of the pointer
+    model = joblib.load(model_bytes) #then use joblib to get this file.
+    return model
+    
+ model = read_file(bucket_name,file_path)
 
 stemmer = nltk.stem.PorterStemmer()
 st_words = ['i',
