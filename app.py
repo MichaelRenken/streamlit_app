@@ -1,3 +1,4 @@
+from sqlite3 import Blob
 import streamlit as st
 
 ###Model Code###
@@ -6,6 +7,7 @@ import nltk #importing a stop words function from nltk
 import string #importing a package of usefull strings. Will use string.punctuation for this
 from google.oauth2 import service_account
 from google.cloud import storage
+import io
 
 # Create API client.
 credentials = service_account.Credentials.from_service_account_info(
@@ -17,12 +19,18 @@ client = storage.Client(credentials=credentials)
 # Uses st.cache_data to only rerun when the query changes or after 10 min.
 @st.cache_resource()
 def read_file(bucket_name, file_path):
-    bucket = client.bucket(bucket_name)
+    bucket = client.get_bucket(bucket_name)
     content = bucket.blob(file_path)
     return content
 
 bucket_name = "mr_streamlit_app"
 file_path = "BR_streamlit.sav"
+
+blob = read_file(bucket_name, file_path) #pulls from google cloud instead
+
+model = io.BytesIO()
+blob.download_to_file(model)
+model.seek(0)
 
 stemmer = nltk.stem.PorterStemmer()
 st_words = ['i',
@@ -229,7 +237,7 @@ def my_tokenizer(sentence):
 
 
 #model = joblib.load('mlknn_streamlit.sav') #model file
-model = read_file(bucket_name, file_path) #pulls from google cloud instead
+
 TFIDF = joblib.load('TFIDF.sav') #tokenizer file
 genrelist = joblib.load('genrelist.sav') #genre name file
 
