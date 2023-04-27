@@ -18,7 +18,7 @@ client = storage.Client(credentials=credentials)
 @st.cache_data()
 def read_file(bucket_name, file_path):
     bucket = client.bucket(bucket_name)
-    content = bucket.blob(file_path).download_as_string().decode("utf-8")
+    content = bucket.blob(file_path)
     return content
 
 bucket_name = "mr_streamlit_app"
