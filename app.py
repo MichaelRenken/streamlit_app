@@ -3,12 +3,11 @@ import streamlit as st
 ###Model Code###
 import joblib
 import nltk #importing a stop words function from nltk
-from nltk.corpus import stopwords
-#nltk.download('stopwords')
+nltk.download('stopwords')
 import string #importing a package of usefull strings. Will use string.punctuation for this
 
 stemmer = nltk.stem.PorterStemmer()
-stopwords = stopwords.words('english')
+st_words = stopwords.words('english')
 
 
 def my_tokenizer(sentence):
@@ -26,7 +25,7 @@ def my_tokenizer(sentence):
     
     # remove stopwords and any tokens that are just empty strings
     for word in listofwords:
-        if (not word in stopwords) and (word!=''):
+        if (not word in st_words) and (word!=''):
             # Stem words
             stemmed_word = stemmer.stem(word)
             listofstemmed_words.append(stemmed_word)
