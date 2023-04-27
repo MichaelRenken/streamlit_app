@@ -31,7 +31,7 @@ def read_file(bucket_name, file_path):
     model = joblib.load(model_bytes) #then use joblib to get this file.
     return model
     
- model = read_file(bucket_name,file_path)
+model = read_file(bucket_name,file_path)
 
 stemmer = nltk.stem.PorterStemmer()
 st_words = ['i',
