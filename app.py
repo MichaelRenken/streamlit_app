@@ -3,7 +3,7 @@ import streamlit as st
 ###Model Code###
 import joblib
 import nltk #importing a stop words function from nltk
-nltk.download('stopwords.words')
+nltk.download('stopwords')
 import string #importing a package of usefull strings. Will use string.punctuation for this
 
 stemmer = nltk.stem.PorterStemmer()
