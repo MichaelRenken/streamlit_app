@@ -80,7 +80,7 @@ final_output.sort_values(by='Confidence',ascending=False,inplace=True) #sort dat
 
 st.text('The model predicts that this book belongs to the below genres:') #text above output
 st.dataframe(final_output) #output final dataframe
-st.subheader('Here are some example descriptions you can use. Paste the below text into the textbox above')
+st.subheader('Here are some example descriptions you can use. Paste the below text into the textbox above.')
 st.markdown("**Stephen King: Fairy Tale**")
 st.text("A #1 New York Times Bestseller and New York Times Book Review Editors' Choice!\
     Legendary storyteller Stephen King goes into the deepest well of his imagination in this spellbinding novel about a seventeen-year-old boy who inherits the keys to a parallel world\
@@ -99,12 +99,13 @@ st.text('It’s an ordinary Thursday morning for Arthur Dent . . . until his hou
 st.markdown('**The Merriam-Webster Dictionary**')
 st.text('A revised and updated edition of the best-selling dictionary covering core vocabulary with over a hundred new entries and senses. More than 75,000 definitions and 8,000 usage examples aid understanding―and cover the words you need today Includes pronunciations, word origins, and synonym lists Features useful tables and special sections on Foreign Words & Phrases and Geographical Names')
 st.subheader("About this Project")
-st.markdown('This project was designed to take a description of a book, and output genres that best suited that description')
-st.markdown('The training dataset is the Good Reads \'Best Books Ever Dataset\', curated by Lorena Casanova Lozano and Sergio Costa Planells')
-st.markdown('The model was trained on 42,204 datapoints, each containing a text description of a book, and tagged with any number of 973 genres')
-st.markdown('All inputs are first fed through a TFIDF vectorizer with stopwords, and word stemming, to vectorize the input by all unigrams and bigrams that occured more than 10 times in the dataset')
-st.markdown('The model then runs this vector through a logistic regression fit on each of the 973 possible genres individually')
-st.markdown('The result is then ordered by the confidence the model has in each output')
+st.markdown('This project was designed to take a description of a book, and output genres that best suited that description.')
+st.markdown('The training dataset is the Good Reads \'Best Books Ever Dataset\', curated by Lorena Casanova Lozano and Sergio Costa Planells.')
+st.markdown('The model was trained on 42,204 datapoints, each containing a text description of a book, and tagged with any number of 973 genres.')
+st.markdown('All inputs are first fed through a TF-IDF vectorizer with stopwords and word stemming to vectorize the input by all unigrams and bigrams that occured more than 10 times in the dataset.')
+st.markdown('The model then runs this vector through a logistic regression fit on each of the 973 possible genres individually.')
+st.markdown('The result is then ordered by the confidence the model has in each output.')
+st.markdown('Much thanks to the teachers and resources at the BrainStation Data Science program for their assistance and support in learning these concepts.')
 st.subheader('Contact Me')
 st.markdown('**Linkedin:** https://www.linkedin.com/in/michael-renken/')
 st.markdown('**email:** mwrenken@gmail.com')
