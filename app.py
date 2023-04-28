@@ -66,7 +66,7 @@ genrelist = joblib.load('genrelist.sav') #genre name file
 st.title("This is Michael Renken's Book Description Genre Classifier!!")
 ###ask for input###
 with st.form(key='my_form'): #connect text input to button
-    input_string = st.text_area("Input a book description here: /n Feel free to use an example below, find a description on your favorite book vendor's website, or make up one on your own!", value='“Once upon a time, a very long time ago now, about last Friday, Winnie-the-Pooh lived in a forest all by himself under the name of Sanders.” Curl up with a true children’s classic by reading A.A.Milne’s Winnie-the-Pooh with iconic decorations by E.H.Shepard. Winnie-the-Pooh may be a bear of very little brain, but thanks to his friends Piglet, Eeyore and, of course, Christopher Robin, he’s never far from an adventure. In this much-loved classic story collection Pooh gets into a tight place, nearly catches a Woozle and heads off on an ‘expotition’ to the North Pole with the other animals.')
+    input_string = st.text_area("Input a book description here! Feel free to use an example below, find a description on your favorite book vendor's website, or make up one on your own!", value='“Once upon a time, a very long time ago now, about last Friday, Winnie-the-Pooh lived in a forest all by himself under the name of Sanders.” Curl up with a true children’s classic by reading A.A.Milne’s Winnie-the-Pooh with iconic decorations by E.H.Shepard. Winnie-the-Pooh may be a bear of very little brain, but thanks to his friends Piglet, Eeyore and, of course, Christopher Robin, he’s never far from an adventure. In this much-loved classic story collection Pooh gets into a tight place, nearly catches a Woozle and heads off on an ‘expotition’ to the North Pole with the other animals.')
     submit_button = st.form_submit_button(label='Submit') #submit button so that moble users can use (otherwise have to hit ctrl+enter)
 ###run the model###
 test = TFIDF.transform([input_string]) #run TFIDF on input
@@ -98,3 +98,13 @@ st.markdown('**Douglas Adams: The Hitchhiker\'s Guide to the Galaxy**')
 st.text('It’s an ordinary Thursday morning for Arthur Dent . . . until his house gets demolished. The Earth follows shortly after to make way for a new hyperspace express route, and Arthur’s best friend has just announced that he’s an alien. After that, things get much, much worse. With just a towel, a small yellow fish, and a book, Arthur has to navigate through a very hostile universe in the company of a gang of unreliable aliens. Luckily the fish is quite good at languages. And the book is The Hitchhiker’s Guide to the Galaxy . . . which helpfully has the words DON’T PANIC inscribed in large, friendly letters on its cover. Douglas Adams’s mega-selling pop-culture classic sends logic into orbit, plays havoc with both time and physics, offers up pithy commentary on such things as ballpoint pens, potted plants, and digital watches . . . and, most important, reveals the ultimate answer to life, the universe, and everything. Now, if you could only figure out the question. . . .')
 st.markdown('**The Merriam-Webster Dictionary**')
 st.text('A revised and updated edition of the best-selling dictionary covering core vocabulary with over a hundred new entries and senses. More than 75,000 definitions and 8,000 usage examples aid understanding―and cover the words you need today Includes pronunciations, word origins, and synonym lists Features useful tables and special sections on Foreign Words & Phrases and Geographical Names')
+st.subheader("About this Project")
+st.markdown('This project was designed to take a description of a book, and output genres that best suited that description')
+st.markdown('The training dataset is the Good Reads \'Best Books Ever Dataset\', curated by Lorena Casanova Lozano and Sergio Costa Planells')
+st.markdown('The model was trained on 42,204 datapoints, each containing a text description of a book, and tagged with any number of 973 genres')
+st.markdown('All inputs are first fed through a TFIDF vectorizer with stopwords, and word stemming, to vectorize the input by all unigrams and bigrams that occured more than 10 times in the dataset')
+st.markdown('The model then runs this vector through a logistic regression fit on each of the 973 possible genres individually')
+st.markdown('The result is then ordered by the confidence the model has in each output')
+st.subheader('Contact Me')
+st.markdown('**Linkedin:** https://www.linkedin.com/in/michael-renken/')
+st.markdown('**email:** mwrenken@gmail.com')
